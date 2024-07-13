@@ -33,6 +33,10 @@ export default function TopicCreateForm() {
             <Textarea label="Description" labelPlacement='outside' placeholder='Describe your topic' name="description"
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(', ')} />
+
+            {formState.errors._form?.join(', ') ?
+              <div className='rounded p-2 bg-red-200 border-red-400'>{formState.errors._form?.join(', ')}</div> : null
+            }
             <Button type="submit">Submit</Button>
           </div>
         </form>
