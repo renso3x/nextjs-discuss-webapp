@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { useFormState } from 'react-dom';
 import {
   Input,
   Button,
@@ -7,11 +8,9 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@nextui-org/react";
-import { useFormState } from "react-dom";
-import * as actions from "@/actions";
-import FormButton from "../common/form-button";
-import { FormAuthError } from "../common/form-auth-error";
+} from '@nextui-org/react';
+import * as actions from '@/actions';
+import FormButton from '@/components/common/form-button';
 
 interface PostCreateFormProps {
   slug: string;
@@ -34,9 +33,10 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
         <form action={action}>
           <div className="flex flex-col gap-4 p-4 w-80">
             <h3 className="text-lg">Create a Post</h3>
+
             <Input
               isInvalid={!!formState.errors.title}
-              errorMessage={formState.errors.title?.join(", ")}
+              errorMessage={formState.errors.title?.join(', ')}
               name="title"
               label="Title"
               labelPlacement="outside"
@@ -44,17 +44,19 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
             />
             <Textarea
               isInvalid={!!formState.errors.content}
-              errorMessage={formState.errors.content?.join(", ")}
+              errorMessage={formState.errors.content?.join(', ')}
               name="content"
               label="Content"
               labelPlacement="outside"
               placeholder="Content"
             />
+
             {formState.errors._form ? (
-              <FormAuthError>
-                {formState.errors._form?.join(", ")}
-              </FormAuthError>
+              <div className="rounded p-2 bg-red-200 border border-red-400">
+                {formState.errors._form.join(', ')}
+              </div>
             ) : null}
+
             <FormButton>Create Post</FormButton>
           </div>
         </form>

@@ -1,28 +1,30 @@
+import Link from 'next/link';
 import {
-  Input,
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem
+  NavbarItem,
+  Input,
 } from '@nextui-org/react';
-import Link from "next/link";
-import HeaderAuth from "./header-auth";
+import HeaderAuth from '@/components/header-auth';
 
-export default async function Header() {
-
+export default function Header() {
   return (
     <Navbar className="shadow mb-6">
       <NavbarBrand>
-        <Link className="font-bold" href="/">Discuss</Link>
+        <Link href="/" className="font-bold">
+          Discuss
+        </Link>
       </NavbarBrand>
       <NavbarContent justify="center">
         <NavbarItem>
           <Input />
         </NavbarItem>
       </NavbarContent>
+
       <NavbarContent justify="end">
         <HeaderAuth />
       </NavbarContent>
     </Navbar>
-  )
+  );
 }
