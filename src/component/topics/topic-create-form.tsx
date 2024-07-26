@@ -10,6 +10,8 @@ import {
 } from '@nextui-org/react';
 import * as actions from '@/actions'
 import { useFormState } from 'react-dom';
+import FormButton from '../common/form-button';
+import { FormAuthError } from '../common/form-auth-error';
 
 export default function TopicCreateForm() {
   const [formState, action] = useFormState(actions.createTopic, {
@@ -35,9 +37,9 @@ export default function TopicCreateForm() {
               errorMessage={formState.errors.description?.join(', ')} />
 
             {formState.errors._form?.join(', ') ?
-              <div className='rounded p-2 bg-red-200 border-red-400'>{formState.errors._form?.join(', ')}</div> : null
+              <FormAuthError>{formState.errors._form?.join(', ')}</FormAuthError> : null
             }
-            <Button type="submit">Submit</Button>
+            <FormButton>Submit</FormButton>
           </div>
         </form>
       </PopoverContent>
