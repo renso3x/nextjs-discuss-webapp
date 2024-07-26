@@ -1,5 +1,3 @@
 export default function PostShowPage() {
-  return (
-    <div>Post Create Page </div>
-  )
+  return <div>Post show Page </div>;
 }

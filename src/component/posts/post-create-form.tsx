@@ -1,22 +1,34 @@
-'use client'
+"use client";
 
-import { Input, Button, Textarea, Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react"
-import { useFormState } from "react-dom"
-import * as actions from '@/actions'
-import FormButton from "../common/form-button"
-import { FormAuthError } from "../common/form-auth-error"
+import {
+  Input,
+  Button,
+  Textarea,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@nextui-org/react";
+import { useFormState } from "react-dom";
+import * as actions from "@/actions";
+import FormButton from "../common/form-button";
+import { FormAuthError } from "../common/form-auth-error";
 
-export default function PostCreateForm() {
-  const [formState, action] = useFormState(actions.createPost, {
-    errors: {}
-  })
+interface PostCreateFormProps {
+  slug: string;
+}
+
+export default function PostCreateForm({ slug }: PostCreateFormProps) {
+  const [formState, action] = useFormState(
+    actions.createPost.bind(null, slug),
+    {
+      errors: {},
+    }
+  );
 
   return (
     <Popover placement="left">
       <PopoverTrigger>
-        <Button color="primary">
-          Create a Post
-        </Button>
+        <Button color="primary">Create a Post</Button>
       </PopoverTrigger>
       <PopoverContent>
         <form action={action}>
@@ -24,7 +36,7 @@ export default function PostCreateForm() {
             <h3 className="text-lg">Create a Post</h3>
             <Input
               isInvalid={!!formState.errors.title}
-              errorMessage={formState.errors.title?.join(', ')}
+              errorMessage={formState.errors.title?.join(", ")}
               name="title"
               label="Title"
               labelPlacement="outside"
@@ -32,17 +44,21 @@ export default function PostCreateForm() {
             />
             <Textarea
               isInvalid={!!formState.errors.content}
-              errorMessage={formState.errors.content?.join(', ')}
+              errorMessage={formState.errors.content?.join(", ")}
               name="content"
               label="Content"
               labelPlacement="outside"
               placeholder="Content"
             />
-            {formState.errors._form ? <FormAuthError>{formState.errors._form?.join(', ')}</FormAuthError> : null}
+            {formState.errors._form ? (
+              <FormAuthError>
+                {formState.errors._form?.join(", ")}
+              </FormAuthError>
+            ) : null}
             <FormButton>Create Post</FormButton>
           </div>
         </form>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
